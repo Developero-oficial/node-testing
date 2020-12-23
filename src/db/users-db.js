@@ -3,18 +3,22 @@ const faker = require('faker');
 const buildUser = (override) => ({
   uid: faker.random.uuid(),
   name: faker.name.firstName(),
+  email: faker.internet.email(),
   title: faker.name.title(),
   ...override,
 });
 
-let users = [buildUser(), buildUser(), buildUser()];
+let users = [buildUser({email: 'john.doe@mail.com'}), buildUser(), buildUser()];
 
 const getUsers = () => users;
 
 const getUserByUid = (uid) => users.filter((user) => user.uid === uid)[0];
 
-const addUser = ({name, title}) => {
-  const newUser = buildUser({name, title});
+const getUserByEmail = (email) =>
+  users.filter((user) => user.email === email)[0];
+
+const addUser = ({name, title, email}) => {
+  const newUser = buildUser({name, title, email});
   users.push(newUser);
   return newUser;
 };
@@ -39,6 +43,7 @@ const deleteUser = (uid) => {
 module.exports = {
   getUsers,
   getUserByUid,
+  getUserByEmail,
   addUser,
   updateUser,
   deleteUser,
