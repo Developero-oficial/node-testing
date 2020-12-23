@@ -1,5 +1,7 @@
-const express = require('express');
+require('dotenv').config();
+const logger = require('pino')();
+const app = require('./src/app');
 
-const app = express();
+const port = process.env.APP_PORT;
 
-app.listen(8080);
+app.listen(port, () => logger.info(`app on port: ${port}`));
