@@ -9,6 +9,7 @@ const {
 } = require('./controllers/users-controller');
 
 const {login} = require('./controllers/auth-controllers');
+const {validateEmail} = require('./middlewares/auth-middleware');
 
 const api = express.Router();
 
@@ -18,6 +19,6 @@ api.post('/users', createUserController);
 api.put('/users/:uid', updateUserController);
 api.delete('/users/:uid', deleteUserController);
 
-api.post('/login', login);
+api.post('/login', validateEmail, login);
 
 module.exports = api;
