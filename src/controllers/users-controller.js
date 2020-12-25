@@ -12,8 +12,8 @@ const getUsersController = (req, res) => {
 };
 
 const getUserByUidController = (req, res) => {
-  const users = getUserByUid(req.params.uid);
-  res.status(200).send({users});
+  const user = getUserByUid(req.params.uid);
+  res.status(200).send({user});
 };
 
 const createUserController = (req, res) => {
